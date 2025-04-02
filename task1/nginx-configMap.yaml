@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+data:
+  # Here we define the Nginx configuration file.
+  # The stub_status module in Nginx provides a simple status page with basic metrics about Nginx’s performance and activity.
+  # It enables an endpoint that outputs key Nginx metrics, which are also available in the stub_status page.
+  # The /stub_status page outputs plain text, which Prometheus cannot directly parse (stub_status.png).
+  grafana-metrics.conf: |
+    server {
+        listen 8080;
+
+        location /stub_status {
+            stub_status on;
+            access_log off;
+            allow all;       
+        }
+    }
+
+

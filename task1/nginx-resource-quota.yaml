@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: nginx-quota
+spec:
+  scopes:
+    # NotTerminating applies to pods that do not have an activeDeadlineSeconds field,
+    # meaning they are expected to run indefinitely (like deployments, stateful sets, etc.).
+    - NotTerminating
+  hard:
+    # requests.cpu and requests.memory are used when scheduling the pod. 
+    # Kubernetes ensures that the node has at least 1000m (1 core) CPU and 2Gi memory available before scheduling the pod.
+    # If a node does not have enough free CPU or memory, the pod will remain in the Pending state until resources free up.
+    requests.cpu: "1000m"
+    requests.memory: "2Gi"
+    # limits.cpu and limits.memory are used to limit the maximum resources the pod can use. 
+    # CPU (limits.cpu): If a pod tries to use more CPU than its limit (even if the node has free CPU), CPU usage is reduced, 
+    # but the pod continues running.
+    # Memory (limits.memory): If a pod exceeds its memory limit, Kubernetes immediately kills it.
+    limits.cpu: "2000m"
+    limits.memory: "4Gi"

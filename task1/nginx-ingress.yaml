@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+spec:
+  # Specifies that this Ingress should be handled by the NGINX Ingress Controller.
+  ingressClassName: nginx
+  rules:
+    # Requests with this domain name (nginx.wow) will be processed by this Ingress.    
+  - host: nginx.wow
+    http:
+      paths:
+        # Routes any request starting with / to the backend.           
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            # Routes traffic to the nginx-service.          
+            name: nginx-service
+            port:
+              # The target port on nginx-service that receives traffic.            
+              number: 80
