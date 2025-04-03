@@ -4,8 +4,8 @@ To do this, I created a deployment for the nginx server (nginx-doomed.yaml).
 
 In order to make sure the deployment failed and produced image-related errors, I did the following:
 
-	- Enabled our Cisco VPN, which seems to interfere with Kubernetes' ability to pull images from the web.
-	- Intentionally introduced an error in the image name (e.g., nginx:1:26).
+- Enabled our Cisco VPN, which seems to interfere with Kubernetes' ability to pull images from the web.
+- Intentionally introduced an error in the image name (e.g., nginx:1:26).
 
 Once the deployment was created, it attempted to spin up pods. As expected, errors started appearing:
 
@@ -32,7 +32,7 @@ While searching for a solution, I ended up (metaphorically) building a helicopte
 
 The realization hit me when I was almost done writing the send-slack-notifications.sh script. That's when I simplified and updated the script to the current version you see now.
 
-And the results of my work can be seen in slack_notifications.png.
+![Success | Slack notifications](slack_notifications.png)
 
 Since this is meant to be a simple script, I kept it concise and made it print only four key variables:
 
