@@ -16,13 +16,13 @@ Alternatively, you can use this query (since selecting everything from performan
 
 > mysql > select ENGINE, ENGINE_LOCK_ID, ENGINE_TRANSACTION_ID, THREAD_ID, LOCK_TYPE, LOCK_STATUS, LOCK_DATA from performance_schema.data_locks;SELECT ENGINE_TRANSACTION_ID as Trx_Id, OBJECT_NAME as `Table`,  INDEX_NAME as `Index`,  LOCK_DATA as Data,  LOCK_MODE as Mode,  LOCK_STATUS as Status,  LOCK_TYPE as Type  FROM performance_schema.data_locks;
 
-![Select output](/select.png)
+![Select output](select.png)
 
 If there are any deadlocks, we can gather more detailed information using this query:
 
 > mysql> SHOW PROCESSLIST;
 
-![SHOW PROCESSLIST output](/show_processlist.png)
+![SHOW PROCESSLIST output](show_processlist.png)
 
 Here, we can find information about the user and query that caused the deadlock (essentially the same information you can check in the "Latest Detected Deadlock" section of the SHOW ENGINE INNODB STATUS\G; output).
 
