@@ -12,7 +12,7 @@ In a production environment, it is important because this ensures Kubernetes can
 
 A ConfigMap acts as a settings file for our app inside Kubernetes. Instead of hardcoding configurations (such as URLs, database settings*, or logs) inside the container, we store them in a ConfigMap.
 
-    * It’s important to note that ConfigMap does not provide encryption or secrecy. If we needed to specify sensitive data, like a DB username and password for the application, we should have used the Secret component (or another third-party tool) to keep the data private.
+> * It’s important to note that ConfigMap does not provide encryption or secrecy. If we needed to specify sensitive data, like a DB username and password for the application, we should have used the Secret component (or another third-party tool) to keep the data private.
 
 Since no sensitive data was passed to Nginx, I didn't create the Secret file.
 
@@ -36,6 +36,8 @@ The Ingress component in Kubernetes is used to manage external HTTP(S) traffic t
 
 ---
 
-After applying all of the listed YAML files and updating the hosts file to include the line 127.0.0.1 nginx.wow, I was able to access Nginx via the browser (nginx-wow.png).
+After applying all of the listed YAML files and updating the hosts file to include the line 127.0.0.1 nginx.wow, I was able to access Nginx via the browser.
+
+![nginx.wow in browser](nginx-wow.png)
 
 There was only one issue I faced: setting up Prometheus and Grafana to fetch data from Nginx. Unfortunately, despite my best efforts, I couldn't establish the connection, no matter how hard I tried :( On the bright side, other dashboards (pre-built ones like Kubernetes / Compute Resources / Cluster or imported ones like 10518 | Pod Stats & Info) worked fine.
