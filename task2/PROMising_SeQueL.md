@@ -98,30 +98,30 @@ This metric counts the current number of transactions that are waiting for a row
 
 And I've decided to add some comments to the alert itself:
 
-    *# Defines the name of the alert* 
+    *Defines the name of the alert* 
 
 -alert: Mysql_Transaction_Deadlock
 
-    *# PromQL expression: We use the increase() function to check how much the metric mysql_global_status_innodb_row_lock_waits has increased in the past 2 minutes. If more than 5 deadlocks have occurred in that timeframe, the alert triggers.*
+    *PromQL expression: We use the increase() function to check how much the metric mysql_global_status_innodb_row_lock_waits has increased in the past 2 minutes. If more than 5 deadlocks have occurred in that timeframe, the alert triggers.*
 
   expr: increase(mysql_global_status_innodb_row_lock_waits[2m]) > 5
 
-    *# Ensures the condition remains true for 5 minutes before triggering the alert.*
+    *Ensures the condition remains true for 5 minutes before triggering the alert.*
 
   for: 5m
 
-    *# Assigns a label (severity: warning) to categorize the alert.*
+    *Assigns a label (severity: warning) to categorize the alert.*
 
   labels:
     severity: warning
 
-    *# Provides additional information in the annotation for better understanding.*
+    *Provides additional information in the annotation for better understanding.*
 
   annotations:
     dashboard: database-metrics
     summary: 'MySQL Deadlocks Detected'
     
-    *# {{ $value | humanize }} dynamically inserts the number of waiting transactions.*
+    *{{ $value | humanize }} dynamically inserts the number of waiting transactions.*
 
   description: '`{{ $value | humanize }}` MySQL transactions are waiting due to deadlocks. Investigate using `SHOW ENGINE INNODB STATUS;` and check blocked transactions.'
 
